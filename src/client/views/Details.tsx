@@ -11,10 +11,10 @@ class Details extends React.Component<IDetailsProps, IDetailsState> {
         }
     }
 
-    async componentDidMount() {
-        const res = await fetch('http://ghibliapi.herokuapp.com/films/' + this.props.match.params.filmid);
-        const film = await res.json();
-        this.setState({ film });
+    componentDidMount() {
+        fetch('http://ghibliapi.herokuapp.com/films/' + this.props.match.params.id)
+            .then(res => res.json())
+            .then(film => this.setState({ film }))
     }
 
     render() {
@@ -30,7 +30,8 @@ class Details extends React.Component<IDetailsProps, IDetailsState> {
     }
 }
 
-interface IDetailsProps extends RouteComponentProps<{ filmid: string }> { }
+interface IDetailsProps extends RouteComponentProps<{ id: string }> { }
+
 interface IDetailsState {
     film: IFilm;
 }
